@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portofolio — Hanz samudra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Warna: semua lewat token supaya terang/gelap ikut pengaturan HP
+     ============================================================ */
+  :root {
+    --paper: #E9EFF6;
+    --card: #FFFFFF;
+    --ink: #14213D;
+    --ink-soft: #46557A;
+    --blue: #2447F5;
+    --on-blue: #FFFFFF;
+    --yellow: #FFD23F;
+    --on-yellow: #14213D;
+    --line: rgba(20, 33, 61, 0.2);
+    --grid: rgba(36, 71, 245, 0.09);
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0E1729;
+      --card: #16223B;
+      --ink: #EAF0FA;
+      --ink-soft: #A9B7D4;
+      --blue: #8FA8FF;
+      --on-blue: #0E1729;
+      --yellow: #FFD23F;
+      --on-yellow: #14213D;
+      --line: rgba(234, 240, 250, 0.22);
+      --grid: rgba(143, 168, 255, 0.1);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0E1729;
+    --card: #16223B;
+    --ink: #EAF0FA;
+    --ink-soft: #A9B7D4;
+    --blue: #8FA8FF;
+    --on-blue: #0E1729;
+    --yellow: #FFD23F;
+    --on-yellow: #14213D;
+    --line: rgba(234, 240, 250, 0.22);
+    --grid: rgba(143, 168, 255, 0.1);
+  }
+
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", "Trebuchet MS", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* ---------- Navigasi ---------- */
+  .nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1.5rem; padding: 1.1rem 0; }
+  .nav-brand { font-weight: 800; text-decoration: none; font-size: 1.1rem; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { text-decoration: none; padding: 0.25rem 0; border-bottom: 2px solid transparent; }
+  .nav-links a:hover { border-bottom-color: var(--blue); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 36px 36px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-inner { padding: 2.5rem 1.25rem 3.5rem; }
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(3.4rem, 15vw, 9rem);
+    line-height: 0.92;
+    font-weight: 800;
+    font-variation-settings: "wdth" 78;
+    letter-spacing: -0.02em;
+  }
+  .hero-lead { max-width: 34rem; margin: 1.4rem 0 0; font-size: 1.25rem; line-height: 1.55; font-weight: 500; color: var(--ink); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.6rem; }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.3rem;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.2;
+    cursor: pointer;
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn-main { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn { transition: transform 0.15s ease; }
+
+  /* Kartu profil */
+  .profil { margin-top: 2.5rem; max-width: 34rem; }
+  .kartu {
+    margin-top: 0.9rem;
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 6px 6px 0 var(--blue);
+    padding: 1.3rem 1.4rem;
+  }
+
+  .info { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 0.55rem 1.25rem; }
+  .info dt { color: var(--ink-soft); }
+  .info dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+
+  /* ---------- Bagian umum ---------- */
+  section.bagian { padding: 4rem 0 0; }
+  section.bagian h2 { margin: 0 0 1.5rem; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.01em; }
+  .bagian p { max-width: 38rem; }
+
+  /* ---------- Proyek ---------- */
+  .daftar-proyek { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .proyek { display: grid; gap: 0.75rem 2rem; padding: 1.6rem 0; border-bottom: 1px solid var(--line); }
+  .proyek h3 { margin: 0; font-size: 1.6rem; line-height: 1.15; font-weight: 700; }
+  .proyek p { margin: 0 0 0.9rem; color: var(--ink-soft); }
+  .tags { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .tag { border: 1.5px solid var(--ink); border-radius: 999px; padding: 0.1rem 0.75rem; font-size: 0.92rem; line-height: 1.5; }
+  .tag.belajar { background: var(--yellow); color: var(--on-yellow); border-color: var(--on-yellow); }
+  .tautan { color: var(--blue); font-weight: 700; text-underline-offset: 4px; }
+  @media (min-width: 46rem) {
+    .proyek { grid-template-columns: 1fr 1.7fr; }
+  }
+
+    .tautan-grup { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; }
+  .info-kerja { max-width: 34rem; margin-top: 1.5rem; }
+
+  /* ---------- Keahlian ---------- */
+  .keterangan { color: var(--ink-soft); margin: 0 0 1.75rem; }
+  .kelompok { display: grid; gap: 1.5rem 2rem; }
+  .kelompok h3 { margin: 0 0 0.6rem; font-size: 1.15rem; font-weight: 700; }
+  .kelompok .tags { margin: 0; }
+  @media (min-width: 46rem) { .kelompok { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ---------- Kontak ---------- */
+  .email-besar {
+    display: inline-block;
+    font-size: clamp(1.5rem, 6vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+    color: var(--blue);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 3px;
+  }
+  .sosmed { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+
+  footer { margin-top: 5rem; padding: 1.5rem 0 2rem; border-top: 2px solid var(--ink); color: var(--ink-soft); font-size: 0.95rem; }
+
+  @media (max-width: 45.99rem) {
+    .wrap { padding-left: 1rem; padding-right: 1rem; }
+    .nav { align-items: flex-start; padding: 1rem 0; }
+    .nav-links { gap: 0.25rem 1rem; }
+    .hero-inner { padding: 2.25rem 1rem 3rem; }
+    .hero h1 {
+      max-width: 100%;
+      font-size: clamp(3rem, 15vw, 5.5rem);
+      overflow-wrap: anywhere;
+    }
+    .hero-lead { max-width: 36rem; font-size: 1.1rem; line-height: 1.55; }
+    .hero-actions { gap: 0.6rem; }
+    .btn { flex: 1 1 10rem; padding: 0.75rem 1rem; text-align: center; }
+    .profil { margin-top: 2rem; }
+    .kartu { padding: 1.15rem 1rem; }
+    .info { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 0.65rem 0.8rem; }
+    section.bagian { padding-top: 3.25rem; }
+    section.bagian h2 { margin-bottom: 1.25rem; }
+    .proyek { padding: 1.35rem 0; }
+    .proyek h3 { font-size: 1.45rem; }
+    .tautan-grup { gap: 0.5rem 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+    .btn:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="nav" aria-label="Navigasi utama">
+    <a class="nav-brand" href="#atas">Hanz samudra</a>
+    <ul class="nav-links">
+      <li><a href="#proyek">Proyek</a></li>
+      <li><a href="#keahlian">Keahlian</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="atas">
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <h1>Hanz samudra</h1>
+      <p class="hero-lead">Junior Front-End Web Developer yang berfokus pada pembuatan antarmuka web modern, ramah pengguna, dan optimal di berbagai perangkat.</p>
+      <div class="hero-actions">
+        <a class="btn btn-main" href="#proyek">Lihat proyek</a>
+        <a class="btn" href="#kontak">Hubungi saya</a>
+      </div>
+
+      <div class="profil">
+        <div class="kartu kartu-tampil" id="kartu-tampil">
+          <dl class="info">
+            <dt>Status</dt><dd>Pelajar</dd>
+            <dt>Sekolah</dt><dd>SMK Teknik Jaringan</dd>
+            <dt>Fokus</dt><dd>Pengembangan web (front-end)</dd>
+            <dt>Sedang dipelajari</dt><dd>JavaScript, Git/GitHub</dd>
+            <dt>Mencari</dt><dd>Pekerjaan Remote / Proyek Freelance</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="bagian" id="proyek" aria-labelledby="h-proyek">
+      <h2 id="h-proyek">Proyek</h2>
+      <ul class="daftar-proyek">
+        <li class="proyek">
+          <h3>Cuaca Kota</h3>
+          <div>
+            <p>Aplikasi cuaca yang mengambil data langsung dari API publik: suhu, kelembapan, angin, dan perkiraan 5 hari untuk kota apa saja. Menangani kasus kota tidak ditemukan dan koneksi gagal.</p>
+            <ul class="tags"><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li><li class="tag">REST API</li></ul>
+            <div class="tautan-grup">
+              <a class="tautan" href="aplikasi-cuaca.html">Lihat demo</a>
+              <a class="tautan" href="https://github.com/burhansamudra242-collab/aplikasi-cuaca">Lihat kode di GitHub</a>
+            </div>
+          </div>
+        </li>
+        <li class="proyek">
+          <h3>Aplikasi Daftar Tugas</h3>
+          <div>
+            <p>Aplikasi untuk mencatat tugas dengan tenggat dan prioritas. Tugas bisa dicentang, diubah, dan dihapus, dan datanya tersimpan otomatis di browser.</p>
+            <ul class="tags"><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li></ul>
+            <div class="tautan-grup">
+              <a class="tautan" href="todo-list.html">Lihat demo</a>
+              <a class="tautan" href="https://github.com/burhansamudra242-collab/todo-list">Lihat kode di GitHub</a>
+            </div>
+          </div>
+        </li>
+        <li class="proyek">
+          <h3>Website Kelas</h3>
+          <div>
+            <p>Situs kelas dengan tiga bagian: jadwal pelajaran per hari, jadwal piket, dan pengumuman dari wali kelas. Tampilannya menyesuaikan layar HP dan tidak perlu login.</p>
+            <ul class="tags"><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li></ul>
+            <div class="tautan-grup">
+              <a class="tautan" href="website-kelas.html">Lihat demo</a>
+              <a class="tautan" href="https://github.com/burhansamudra242-collab/website-kelas">Lihat kode di GitHub</a>
+            </div>
+          </div>
+        </li>
+        <li class="proyek">
+          <h3>Toko Online Sederhana</h3>
+          <div>
+            <p>Halaman katalog produk dengan filter kategori, keranjang belanja, dan total harga otomatis. Isi keranjang tetap tersimpan saat halaman ditutup.</p>
+            <ul class="tags"><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li></ul>
+            <div class="tautan-grup">
+              <a class="tautan" href="toko-online.html">Lihat demo</a>
+              <a class="tautan" href="https://github.com/burhansamudra242-collab/website-toko-online-sederhana">Lihat kode di GitHub</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="bagian" id="keahlian" aria-labelledby="h-keahlian">
+      <h2 id="h-keahlian">Keahlian</h2>
+      <p class="keterangan">Garis tepi berarti sudah sering saya pakai. Latar kuning berarti masih saya pelajari.</p>
+      <div class="kelompok">
+        <div>
+          <h3>Front-end</h3>
+          <ul class="tags"><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li><li class="tag">Desain responsif</li><li class="tag belajar">React</li></ul>
+        </div>
+        <div>
+          <h3>Back-end</h3>
+          <ul class="tags"><li class="tag belajar">Node.js</li><li class="tag belajar">REST API</li><li class="tag belajar">Database dasar</li></ul>
+        </div>
+        <div>
+          <h3>Alat dan kerja tim</h3>
+          <ul class="tags"><li class="tag">Git</li><li class="tag">GitHub</li><li class="tag">VS Code</li><li class="tag belajar">Deploy website</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bagian" id="tentang" aria-labelledby="h-tentang">
+      <h2 id="h-tentang">Tentang saya</h2>
+      <p>Saya pelajar yang belajar pengembangan web lewat proyek nyata dan dokumentasi resmi. Saya terbiasa bekerja mandiri, mencatat progres dengan jelas, dan bertanya saat menemui hambatan.</p>
+      <dl class="info info-kerja">
+        <dt>Ketersediaan</dt><dd>Paruh waktu, di luar jam sekolah</dd>
+        <dt>Zona waktu</dt><dd>WIB (UTC+7)</dd>
+        <dt>Komunikasi</dt><dd>Email, chat, dan video call</dd>
+      </dl>
+    </section>
+
+    <section class="bagian" id="kontak" aria-labelledby="h-kontak">
+      <h2 id="h-kontak">Kontak</h2>
+      <p>Punya lowongan remote atau proyek web? Kirim email, saya balas secepatnya.</p>
+      <a class="email-besar" href="mailto:burhansamudra2@gmail.com">burhansamudra2@gmail.com</a>
+      <ul class="sosmed">
+        <li><a class="tautan" href="https://github.com/burhansamudra242-collab">GitHub</a></li>
+        <li><a class="tautan" href="https://www.instagram.com/burhan_samudra7">Instagram</a></li>
+        <li><a class="tautan" href="https://www.linkedin.com/in/burhan-samudra">LinkedIn</a></li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="tahun">2026</span> Hanz samudra</div>
+</footer>
+
+<script>
+  (function () {
+    var t = document.getElementById('tahun');
+    if (t) t.textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>
